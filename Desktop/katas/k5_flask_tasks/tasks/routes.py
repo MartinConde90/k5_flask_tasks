@@ -28,7 +28,7 @@ def newTask():
         return render_template("task.html", form=form) #render_template es para plantillas
     
     if form.validate():
-        fdatos = open(DATOS, 'a') # 'w' de escritura, 'a' de append
+        fdatos = open(DATOS, 'a', newline='') # 'w' de escritura, 'a' de append
         csvwriter = csv.writer(fdatos, delimiter=",", quotechar='"')
 
         title = request.values.get('title')
