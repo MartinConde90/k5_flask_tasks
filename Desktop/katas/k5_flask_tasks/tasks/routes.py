@@ -1,5 +1,6 @@
 from tasks import app
 from flask import render_template, request, redirect, url_for
+from tasks.forms import TaskForm
 
 import csv
 
@@ -21,31 +22,23 @@ def index():
 
 @app.route("/newtask", methods=['GET', 'POST']) #son los metodos que vamos a aceptar, nuestra ruta va a poder ser get o post
 def newTask():
-    if request.method =='GET':
-        return render_template("task.html") #render_template es para plantillas
+    form = TaskForm(request.form)
+
+    if request.method =='GET': #request es una instancia de repeticion que nos pide el servidor
+        return render_template("task.html", form=form) #render_template es para plantillas
     
-    fdatos = open(DATOS, 'a') # 'w' de escritura, 'a' de append
-    csvwriter = csv.writer(fdatos, delimiter=",", quotechar='"')
+    if form.validate():
+        fdatos = open(DATOS, 'a') # 'w' de escritura, 'a' de append
+        csvwriter = csv.writer(fdatos, delimiter=",", quotechar='"')
 
-    title = request.values.get('title')
-    desc = request.values.get('desc')
-    date = request.values.get('date')
+        title = request.values.get('title')
+        desc = request.values.get('description')
+        date = request.values.get('date')
 
-    csvwriter.writerow([title, desc, date])
+        csvwriter.writerow([title, desc, date])
 
-    fdatos.close()
-    return redirect(url_for("index")) #esto redirige a index
-    #return render_template("task.html") #una vez hecho todo el if, al darle a enviar, creará una carpeta en "data"
-
-
-
-    print('method:', request.method)
-    print('parametros:', request.values)
-
-
-'''
-    recuperar parametros
-    abrir fichero
-    añadir registros
-    devolver respuesta todo correcto
-    '''
+        fdatos.close()
+        return redirect(url_for("index")) #esto redirige a index
+        #return render_template("task.html") #una vez hecho todo el if, al darle a enviar, creará una carpeta en "data"
+    else:
+        return render_template("task.html", form=form)
