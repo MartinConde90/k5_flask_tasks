@@ -28,10 +28,10 @@
                 {% endif %}
             </div>
             <div class="six columns">
-                {{ form.date(class='u-full-width', type="date") }}
+                {{ form.fx(class='u-full-width', type="date") }}
                 <!--<input class="u-full-width" type="date" name="date">-->
-                {% if form.date.errors %}
-                    {% for error in form.date.errors %}
+                {% if form.fx.errors %}
+                    {% for error in form.fx.errors %}
                         <p class='field-error'>{{ error }}</p>
                     {% endfor %}
                 {% endif %}

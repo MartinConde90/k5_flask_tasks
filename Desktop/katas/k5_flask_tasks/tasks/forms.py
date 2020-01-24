@@ -14,7 +14,7 @@ def greater_than_today(form, field):
 class TaskForm(FlaskForm):
     title = StringField('Título', validators=[DataRequired(), Length(min=3, max=15, message="La longitud ha de estar entre 3 y 15")])
     description = StringField('Description', widget=TextArea())
-    date = DateField('Fecha', validators=[DataRequired(), greater_than_today])
+    fx = DateField('Fecha', validators=[DataRequired(), greater_than_today])
 
     submit = SubmitField('Enviar')
 
@@ -23,6 +23,6 @@ class ProccesTaskForm(FlaskForm):
     btn = HiddenField('btn', validators=[DataRequired(), AnyOf(['M', 'B'])])
     title = StringField('Título', validators=[DataRequired(), Length(min=3, max=15, message="La longitud ha de estar entre 3 y 15")])
     description = StringField('Description', widget=TextArea())
-    date = DateField('Fecha', validators=[DataRequired()])
+    fx = DateField('Fecha', validators=[DataRequired()])
 
     submit = SubmitField('Aceptar')
