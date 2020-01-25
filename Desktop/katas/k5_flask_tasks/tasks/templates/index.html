@@ -14,10 +14,10 @@
             </tr>
             {% for tarea in registros %}
             <tr>
-                <td><input type="radio" name="ix" value="{{tarea[3]}}"></td> <!--loop.index dice que posicion tiene cada item en el bucle for, empieza en 1-->
-                <td>{{tarea[0]}}</td>
-                <td>{{tarea[1]}}</td>
-                <td>{{tarea[2]}}</td>
+                <td><input type="radio" name="ix" value="{{tarea['id']}}"></td> <!--loop.index dice que posicion tiene cada item en el bucle for, empieza en 1-->
+                <td>{{tarea['titulo']}}</td>
+                <td>{{tarea['descripcion']}}</td>
+                <td>{{tarea['fecha']}}</td>
             </tr>
             {% endfor %}
         </table>
